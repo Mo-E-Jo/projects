@@ -7,7 +7,7 @@ function SearchBar() {
         setUserInput(target.value)
     }
 
-    return (
+    return ( 
         <>
         <form>
             <label>Type Song Name Here:
