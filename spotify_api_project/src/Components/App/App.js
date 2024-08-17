@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import styles from "./App.module.css"
 import SearchResults from "../SearchResults/SearchResults";
-/*import SearchBar from './SearchBar.js'; */
+import Playlist from "../Playlist/Playlist";
+import SearchBar from "../SearchBar/SearchBar.js";
 
 function App () {
   const [searchResults, setSearchResults] = useState(
@@ -16,8 +17,41 @@ function App () {
       artist: "examples track artist 2",
       album: "examples track album 2",
       id: 2
-    }]
+    },
+  ]
   );
+
+  const [playlistName, setPlaylistName] = useState("Example Playlist Name");
+
+  const [playlistTracks, setPlaylistTracks] = useState(
+    [{
+      name: "examples playlist name 1", 
+      artist: "examples playlist artist 1",
+      album: "examples traplaylistck album 1",
+      id: 1
+    },
+    {
+      name: "examples playlist name 2", 
+      artist: "examples playlist artist 2",
+      album: "examples playlist album 2",
+      id: 2
+    },
+    {
+      name: "examples playlist name 2", 
+      artist: "examples playlist artist 2",
+      album: "examples playlist album 2",
+      id: 3
+    },
+  ]
+  )
+
+  function addTrack(track) {
+    const existingTrack = playlistTracks.find(t => t.id === track.id);
+    const newTrack = playlistTracks.concat(track);
+    if (existingTrack) {
+      console.log("Track already exists")
+    }
+  }
 
 
   return (
@@ -27,11 +61,12 @@ function App () {
       </h1>
       <div className={styles.App}>
         {/* <!-- Add a SearchBar component --> */}
-        
+        <SearchBar />
         <div className={styles['App-playlist']}>
           {/* <!-- Add a SearchResults component --> */}
-          <SearchResults userSearchResults={SearchResults}/>
+          <SearchResults userSearchResults={searchResults} onAdd={addTrack}/>
           {/* <!-- Add a Playlist component --> */}
+          <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
         </div>
       </div>
     </div>
