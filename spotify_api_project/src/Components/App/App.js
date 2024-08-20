@@ -48,9 +48,16 @@ function App () {
   function addTrack(track) {
     const existingTrack = playlistTracks.find(t => t.id === track.id);
     const newTrack = playlistTracks.concat(track);
-    if (existingTrack) {
-      console.log("Track already exists")
-    }
+      if (existingTrack) {
+        console.log("Track already exists")
+      } else {
+        setPlaylistTracks(newTrack);
+      }
+  }
+
+  function removeTrack(track) {
+    const existingTrack = playlistTracks.filter(t => t.id === track.id);
+    setPlaylistTracks(existingTrack)
   }
 
 
@@ -66,7 +73,7 @@ function App () {
           {/* <!-- Add a SearchResults component --> */}
           <SearchResults userSearchResults={searchResults} onAdd={addTrack}/>
           {/* <!-- Add a Playlist component --> */}
-          <Playlist playlistName={playlistName} playlistTracks={playlistTracks}/>
+          <Playlist playlistName={playlistName} playlistTracks={playlistTracks} onRemove={removeTrack}/>
         </div>
       </div>
     </div>
