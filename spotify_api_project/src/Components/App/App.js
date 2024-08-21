@@ -37,9 +37,9 @@ function App () {
       id: 2
     },
     {
-      name: "examples playlist name 2", 
-      artist: "examples playlist artist 2",
-      album: "examples playlist album 2",
+      name: "examples playlist name 3", 
+      artist: "examples playlist artist 3",
+      album: "examples playlist album 3",
       id: 3
     },
   ]
@@ -56,8 +56,20 @@ function App () {
   }
 
   function removeTrack(track) {
-    const existingTrack = playlistTracks.filter(t => t.id === track.id);
+    const existingTrack = playlistTracks.filter(t => t.id !== track.id);
     setPlaylistTracks(existingTrack)
+  }
+
+  function updatePlaylistName(name) {
+    setPlaylistName(name)
+  }
+
+  function savePlaylist() {
+    const trackURIS = playlistTracks.map(t => t.uri);
+  }
+
+  function search(term) {
+    console.log(term)
   }
 
 
@@ -68,12 +80,12 @@ function App () {
       </h1>
       <div className={styles.App}>
         {/* <!-- Add a SearchBar component --> */}
-        <SearchBar />
+        <SearchBar onSearch={search}/>
         <div className={styles['App-playlist']}>
           {/* <!-- Add a SearchResults component --> */}
           <SearchResults userSearchResults={searchResults} onAdd={addTrack}/>
           {/* <!-- Add a Playlist component --> */}
-          <Playlist playlistName={playlistName} playlistTracks={playlistTracks} onRemove={removeTrack}/>
+          <Playlist playlistName={playlistName} playlistTracks={playlistTracks} onRemove={removeTrack} onNameChange={updatePlaylistName} onSave={savePlaylist}/>
         </div>
       </div>
     </div>
