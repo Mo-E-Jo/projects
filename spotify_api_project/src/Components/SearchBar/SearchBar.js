@@ -4,8 +4,9 @@ import styles from './SearchBar.module.css'
 function SearchBar(props) {
     const [userInput, setUserInput] = useState("")
 
-    function passInput() {
+    function passInput(event) {
         props.onSearch(userInput)
+        event.preventDefault();
     }
 
     function handleChange({target}) {
